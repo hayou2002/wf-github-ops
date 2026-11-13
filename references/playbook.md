@@ -33,7 +33,9 @@
 - `NewApi管理_repo` **不是重复仓库**，它是主仓库 `NewApi管理` 的 git worktree（分支 `sync-main`），专用于推档案仓：命令是 `git push origin sync-main:main`，只挑脱敏后的改动文件，大二进制和历史目录不进档案仓。删掉它等于拆掉这条通道。
 - 档案仓 `hayou2002/newapi-manager-backup`（私有）当前与本地 `sync-main` 一致；本地 `main` 比远端多出若干提交，是「精选推送」设计的正常状态，不是漏推。
 - `NewApi管理` 里嵌着两个仓库：`new-api-src-rc50`（上游源码，无远端）和 `projects/loomy-keeper`（有远端）。提交前先确认它们是被 .gitignore 排除还是刻意保留。
-- 本机没有 `gh` 命令；凭据走 Windows 凭据管理器（不在文件里）；GitHub 账号 `hayou2002`。
+- 本机没有 `gh` 命令；凭据走 Windows 凭据管理器（不在文件里）；GitHub 账号 `hayou2002`,token 权限 `gist, repo, workflow`。
+- 凭据能取出来用:`printf 'protocol=https\nhost=github.com\n\n' | git credential fill` 返回 `password=`,拿它当 `Authorization: Bearer` 就能调 REST API——建库、改描述、加 topics、发 Release 都不必开浏览器。
+- 本机 IPv6 不可用,`curl` 一律加 `-4`,否则会卡住。token 不写进命令行参数,用 `-K -` 从标准输入喂,免得留在进程列表里。
 
 ## 取舍规则（每趟先做这一件事）
 
@@ -132,7 +134,9 @@ git -C <worktree> push origin sync-main:main   # 档案仓走 worktree 通道
 - 认证失败先看 `git remote -v` 里有没有被写进地址的 token；有就换成干净地址，别把 token 留在配置里。
 - 推送前先看这次要推的提交清单（`git log --oneline @{u}..HEAD`），确认没有夹带。
 - 必须先问用户再做的动作：强推（`--force`）、覆盖远端历史、改仓库可见性。
-- 只在网站上做的事（新建仓库、改 README、发 Release、删远端分支）统一走 GitHub 网站。本机没有 `gh`，也没装图形客户端，所以这几步开浏览器做，并带着用户一起点，不要只丢一段文字让他自己找按钮。
+- 远端结构性的动作(新建仓库、改描述与 topics、发 Release、删分支与标签)优先用 REST API 做,命令见上面的认证说明与支线 2、3。本机没有 `gh`,不要写 `gh repo create` 这类跑不了的命令。
+- 改 README 是本地文件改动,走底座 4 提交推送,不要跑去网页上编辑。
+- 需要用户看效果、确认可见性,或 API 报 403/429 时,再开浏览器带用户一起点,不要只丢一段文字让他自己找按钮。
 
 ### 步骤 6 · 验证与记录
 
@@ -167,15 +171,25 @@ git -C <仓库> log --oneline -3 origin/main
 
 **公开还是私有**：只给自己备份 → 私有；要给同事或客户看 → 公开，并且 LICENSE 与 README 都要有。
 
-**新建仓库（走 GitHub 网站，可以让 agent 用浏览器带着你点）**：
+**新建仓库(默认走 REST API)**:
 
-1. 打开 `github.com/new`。
-2. 填仓库名；描述选填。
-3. **不要**勾选初始化 README / .gitignore / license，否则推送会冲突。
-4. 可见性按上面第 2 条选。
-5. 建好后复制页面给的 HTTPS 地址。
-6. 本地：`git -C <仓库> remote add origin <地址>`；已有 origin 就 `git remote set-url origin <地址>`。
-7. `git -C <仓库> push -u origin main`。
+```bash
+TOKEN=$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill | sed -n 's/^password=//p')
+curl -4 -sS -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json" \
+  -d '{"name":"<仓库名>","description":"<一句话>","private":false}' \
+  https://api.github.com/user/repos
+```
+
+1. 请求体里**不要**带 `auto_init`:勾了初始化 README / .gitignore / license 会让首次 `push` 被拒。
+2. 可见性按上面第 2 条选;技能与工具类仓库通常公开,只给自己备份的用 `"private": true`。
+3. 本地:`git -C <仓库> remote add origin https://github.com/<owner>/<仓库名>.git`;已有 origin 就 `git remote set-url`。
+4. `git -C <仓库> push -u origin main`。
+5. 门面顺手补齐:`description` 已在建库请求里给;topics 用 `PUT /repos/<owner>/<repo>/topics`,请求体 `{"names":[...]}`。
+6. 验证:回读 `/repos/<owner>/<repo>/git/trees/main?recursive=1`,看文件是不是都到了。
+
+API 拿不到权限或被限流时,退回 GitHub 网站:打开 `github.com/new` 建空库(同样不勾初始化),再按上面第 3 步接本地。
+
+
 8. 验证：刷新仓库页面能看到文件和提交。
 
 ## 支线 ③ · 远端维护
@@ -190,15 +204,23 @@ git -C <仓库> log --oneline -3 origin/main
 
 **版本号规则**：给别人用的项目用 `v1.0.0` 这种（加功能第二位加一，修小问题第三位加一，首个版本 `v1.0.0`）；只做备份、不发功能的仓库用日期式 `v2026.11.13`。标签名和 Release 标题用同一个版本号。
 
-**发 Release（走 GitHub 网站，可以让 agent 用浏览器带着你点）**：
+**发 Release(默认走 REST API)**:
 
-1. 打开仓库页面，右侧 `Releases` → `Draft a new release`。
-2. `Choose a tag` 里填版本号 → 选 `Create new tag on publish`（基于当前 `main`）。
-3. 标题填版本号。
-4. 说明写三行：这次改了什么、怎么用、有没有要注意的。
-5. 需要给下载文件就拖进附件区。
-6. `Publish release`。
-7. 验证：仓库首页右侧出现这个版本，标签列表里有它。
+```bash
+TOKEN=$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill | sed -n 's/^password=//p')
+curl -4 -sS -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json" \
+  -d '{"tag_name":"v0.1.0","name":"v0.1.0","body":"这次改了什么 / 怎么用 / 要注意什么","draft":false,"prerelease":false}' \
+  https://api.github.com/repos/<owner>/<repo>/releases
+```
+
+1. 版本号按上面的规则定;`tag_name` 和 `name` 用同一个。
+2. 说明写三行就够:这次改了什么、怎么用、有没有要注意的。别把 README 全文贴进去。
+3. 标签跟着 Release 一起建,不用先手动打 tag。
+4. 要挂可下载文件时先建 Release,再往 `upload_url` 传附件;不想折腾就走网站拖拽。
+5. 验证:`GET /repos/<owner>/<repo>/releases/latest`,确认版本号与说明都在。
+
+退回网站:仓库页右侧 `Releases` → `Draft a new release`,填版本号 → `Create new tag on publish`。
+
 
 ## 支线 ④ · 正式发布
 
