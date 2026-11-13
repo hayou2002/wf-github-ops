@@ -1,0 +1,232 @@
+{
+  "workflow": "wf-github-ops",
+  "title": "本地 Git 整理与 GitHub 上传",
+  "status": "active",
+  "created": "2026-11-13",
+  "updated": "2026-11-13",
+  "sources": [
+    {
+      "name": "beautify-github-readme",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/beautify-github-readme",
+        "subpath": "skills/beautify-github-readme",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "beautify-github-readme"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ②③：仓库门面，重做首页 README 与配图",
+      "digest": "sha256:0d4dd8431c22485772d50c10b66082b03430f47c41a9c11429f4aa8677aa94d1",
+      "files": {
+        "agents/openai.yaml": "sha256:f43bc40f7fea095d63ebf2abf9fa9d1dc16ffba2159d0919fd1c1bf16ee0955a",
+        "references/content-architecture.md": "sha256:6c915f670819947df2e64d045218afe072d538c418c5b1450d5ab92d755cee0d",
+        "references/github-readme-canvas.md": "sha256:576ce0add01c3e0ea2ff2c39a0a7e59c69d3096c05796b0671527930c56cb49d",
+        "references/hybrid-svg-production.md": "sha256:ab664473785efb609461a73b957f8f69e6ed32730ce11689b6123d9d038b28b1",
+        "references/motion-production.md": "sha256:c9ada426364ee6fd089e434c01d5d34246413d4591421b41e2a5b786b94e895a",
+        "references/project-native-hero.md": "sha256:8630160574d789d04d7f7ef6553a8936a810808a822401982f231a3cc327ef29",
+        "references/showcase-contribution.md": "sha256:b011cb4646719e832286b8e0ad03db38ac9e7a19b80d4c580cc0954b5dbcb567",
+        "references/svg-production.md": "sha256:062da9b8a552b5674ca3e79fbe04c02302d0ee5c6f61a24e3db2e64a61f58198",
+        "references/visual-direction.md": "sha256:09b1d2bf38e375ffa2a1d6b337ce5b649c38a9118d9f4242837e8979f3bb4912",
+        "scripts/audit_readme.py": "sha256:266d4ff92b9cb7ea78b48a2d26ed628940a09ee6d71c74881275567b0d2828ed",
+        "scripts/render_motion_gif.py": "sha256:e7332f450943c6ea604fb724159ecac5826614382f9dbeffe274d8ae68a669b5",
+        "SKILL.md": "sha256:f3854a1ff509d26f44e5e6a7547a3670e1d2733987d6b300ddcc68c1a17aa14b"
+      }
+    },
+    {
+      "name": "git-ship",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/git-ship",
+        "subpath": "",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "git-ship"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ④：正式发布时接管提交与推送；会自动合并，仅用户明确要求时走",
+      "digest": "sha256:859bb991bda6636832c3661dfd215b518c7d826ccb68c008269da257af5714a6",
+      "files": {
+        "assets/readme/hero.svg": "sha256:c88cd95a3ffc32835500cb076bea2010e3c770dbc770544dc282cbca66233a50",
+        "assets/readme/workflow.svg": "sha256:a3b5398ec27fb556333956504c016a2336202733f53a5cc0fc9b6aff8f8c6f51",
+        "LICENSE": "sha256:d44a3ca218007a85d3be41a0b76553d746e42336c7a63c6c6687d2619199c3c4",
+        "README.md": "sha256:c8e202b36610bdd4a386bf574bdcfb58a81ecf8a5a9d2ac6cf6a58e8e3808346",
+        "README.zh-CN.md": "sha256:fc13927890d58c07d48b76b2232ab0e5129d04c9421f021be827a796a145b8cd",
+        "SKILL.md": "sha256:d8cd8ca35ea6efd0b0044c6536bc4ce044941415ada137cf0310577d0e5e92a8"
+      }
+    },
+    {
+      "name": "oil-code-review",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-dev-skills",
+        "subpath": "skills/oil-code-review",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-code-review"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ②：改动里有代码、且要对外时才审，私人备份仓不用",
+      "digest": "sha256:b19ab1853a4c457640a75b19acef63eeb63d5b78c07f8d215806e42dee21ef07",
+      "files": {
+        "references/review-playbook.md": "sha256:cedcb9bf80b07d7e25d065442ac9627179bab4a8ae8e394688ee47df5228644a",
+        "scripts/review_helper.py": "sha256:b4bf2ddc988d786597bacbe9e6fc8c6d7dd4e469b36712f80f9bf85e4151a7e4",
+        "SKILL.md": "sha256:8fce5d9abc10f50a0eea35b5916c077af5794a6e57ef19ed931c7e6fc6d840e6",
+        "tests/test_review_helper.py": "sha256:d22b920a96c53666290067f2c3575aa54d249795e3cbbb425617db8d829b2cd2"
+      }
+    },
+    {
+      "name": "oil-diff",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-diff",
+        "subpath": "",
+        "commit": "8f4b40c7a12098deac4d412d6d20d4ac18893300",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-diff"
+      },
+      "recorded": "2026-11-13",
+      "uses": "底座步骤 3、4：提交前把改动做成网页，看清有没有夹带",
+      "digest": "sha256:368e225c6c3d40deba6eccfa3d954d185f50eada738cc60e1f0d0ecc2d004b14",
+      "files": {
+        ".gitignore": "sha256:6ce8a728ea0a1ac62b17ce8e1721559149ed8770bbb6e5af7478a2247c492c1e",
+        "assets/readme/architecture.svg": "sha256:7f9f6ee89760a4dbd70192c84580de5566e960a1f50b4bfa48cb2abc499fb802",
+        "assets/readme/before-after.svg": "sha256:87f40a0dba89f4acd06d90d4e298697633bc159adb4ea792ea8511fe83f36d71",
+        "assets/readme/case-diagram-routing.png": "sha256:1cd43a77f0b736a2813ad542baf128de7aaff72cec9e322ddee1f44938d07857",
+        "assets/readme/case-diagram-shoot.png": "sha256:d2404c05ae7e1c89f1fa89a72e648b31c7473bcaaf083e38325908732ef102ed",
+        "assets/readme/case-drawer.png": "sha256:de284a2617db4eb765565c7224ce0026368f79fe3129acd9c3c76b102efb7c1e",
+        "assets/readme/case-overview.png": "sha256:9271da88fcffb439a20a44078e5132bbec3b170d778f8a493ab25e4be663d9ad",
+        "assets/readme/hero.svg": "sha256:203960072c5691ff706c62ca846e74358bd6cb21a2ee11cc48229ae2526007e8",
+        "assets/readme/made-with-beautify.svg": "sha256:13d1422a34e59903e7c80dcaa4bf1c3f7b5fadb0e2d4e802408a436c91a16b68",
+        "assets/readme/section-cases.svg": "sha256:de17be6ba11f1cf09789758404fe8794150e9d8b3fb5db3b5812ac47c3f5a188",
+        "assets/readme/section-features.svg": "sha256:4af5d3d27e772714151d0172702e39c0767487002fdd309ffd662fd84513b593",
+        "assets/readme/section-use.svg": "sha256:28f80beaed1e13f285c4afad88f810cbd5b8415f5c8c154ab1a88679ad9a374f",
+        "assets/readme/section-workflow.svg": "sha256:41a44ff763b8764192c5f815326fcd9b73ceb1cf36fcfcd449535636240f9c90",
+        "assets/readme/workflow.svg": "sha256:08582b1ac402eb647309c2b00046c05efa07a2bd0bf9af6cf77775fbca466a74",
+        "assets/report.css": "sha256:4ff4fcadc217c361269968cf28e328f973812297c15a0e3c93cf1d6baf14c51f",
+        "assets/report.js": "sha256:fb9845d5ab4d1d07dc9b5fe040ec511ae67eba3808bcb880ec105e0a2dc4170a",
+        "LICENSE": "sha256:d44a3ca218007a85d3be41a0b76553d746e42336c7a63c6c6687d2619199c3c4",
+        "README.md": "sha256:2895a44c06cbd204992ca02510855259d48bb2e1c717a5349d6fcfa123f65cd8",
+        "references/copywriting-and-structure.md": "sha256:68210d4b6ee5d7b0243013766e108a5dc9a6964035261e4e9bc1fa8c3fa9e1c5",
+        "references/visual-and-interaction.md": "sha256:4916fc051f758588859505b9e32d6a01d2c852ee8d34053625012c2b00e2be9a",
+        "scripts/collect_diff.py": "sha256:55ecf4a640470e409fb692388158fd7f98e20782edbac0365501d6accbece7df",
+        "scripts/lint_report.py": "sha256:f0ae288f64bbfd5a1240bf1174732a8eac56e2206f924cf28cd855fe0523ee85",
+        "scripts/render_report.py": "sha256:cb719865e682e1c9dd931fcd41047d859be34cb568e34ec2e6eaa915d88f9973",
+        "SKILL.md": "sha256:1214b3a5ebc61f8f440e28fff8e1a37da4621feca7efb87f4642e70d61d12e0e",
+        "tests/test_oil_diff.py": "sha256:51ad307567dade14fd0fbefa97359cc60b37f54bdb6bb27dd815c620eab3baa3"
+      }
+    },
+    {
+      "name": "oil-explore",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-dev-skills",
+        "subpath": "skills/oil-explore",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-explore"
+      },
+      "recorded": "2026-11-13",
+      "uses": "底座步骤 1：只在遇到陌生大目录、要判断该不该整个传上去时用；支线 ② 摸清结构",
+      "digest": "sha256:4cee6a4a30741bc80e43dc0268185ddd5f76fed3ae86a375559620141523c151",
+      "files": {
+        "references/parallel-exploration.md": "sha256:e49c006a62354b40ecea99d9ce834df98a60b2e53e1ddaa7609da5c3f5371ff7",
+        "scripts/preferences.py": "sha256:8d700533aa2795cee4f931370a1c371827bf6dd87d3545f28521694984dc4d12",
+        "scripts/repo_map.py": "sha256:79e95f0f001443792a8d1a3c925a2b5f2e3cea83a603458a15707c4ab14b62ae",
+        "SKILL.md": "sha256:108809023840e79b20fb6e71d8bee9eae570fe39f0c99ba2408f69da866f6a01",
+        "tests/test_preferences.py": "sha256:a0cdb242e26bff67e974df0bb412c488fb5c6296c3c7bf8e90924909b29fae2b",
+        "tests/test_repo_map.py": "sha256:eb2b57cc2e09ae96ea2802d3d1f5260d8e6772c8b8725611543233f968e2e58f"
+      }
+    },
+    {
+      "name": "oil-govern",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-dev-skills",
+        "subpath": "skills/oil-govern",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-govern"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ③：远端维护时体检分支、worktree 与过期文档",
+      "digest": "sha256:9e30a75b320be13f10537223a46e10e4eb96536ff5907b1e48f58eea87790706",
+      "files": {
+        "references/dev-profile.md": "sha256:961d5b6aec8923bf6c4ab85e6605aed1c4d6f2e93b01d45918119a3becb97a3c",
+        "references/governance-guide.md": "sha256:1d8666a5c9f687a2379c1a9d623930e4a6ed456d15fef36cae2fea619f487970",
+        "scripts/audit_repo.py": "sha256:36b4bea23db824b8294c73b981e30e6420fac9ec9d366cf033971bb46378ed13",
+        "SKILL.md": "sha256:f45ed978a5379653724e20be131a97c76b00545698f5bd6d524396b814744f16",
+        "tests/test_audit_repo.py": "sha256:db98eb93fbf9a7e7cce55987c098615f44ed4d02cc1f68ea09b4ab5b999c986a"
+      }
+    },
+    {
+      "name": "oil-tone",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-tone",
+        "subpath": "skills/oil-tone",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-tone"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ②③：仓库描述、README、Release 说明的文案口径",
+      "digest": "sha256:5b49ffbc81b70d08acccf7c9e428d2ea003f667181f954af2091f69bec84e96d",
+      "files": {
+        "agents/openai.yaml": "sha256:bfa517852281b0de7d999938a99137fbd07d4517f558395919cdb8dc5d9e372b",
+        "scripts/tone_lint.py": "sha256:6dd67656a1475e5c5ebe3caf8ce4f135d22309a222ec19a91bb438f0ff483bda",
+        "SKILL.md": "sha256:4c41226e5abe9e50035ca2e4edb0615f41d1d9bcac1de2d166bb3265837ca059"
+      }
+    },
+    {
+      "name": "oil-visual",
+      "mode": "reference",
+      "source": {
+        "kind": "github",
+        "repo": "oil-oil/oil-visual",
+        "subpath": "",
+        "commit": "",
+        "label": "magpie 库",
+        "root": "library",
+        "rel": "oil-visual"
+      },
+      "recorded": "2026-11-13",
+      "uses": "支线 ②③：首页或文档需要配图时",
+      "digest": "sha256:05e766dda21aab4ebe936768316338b41e3c989f4e02a8f24c4643b4439af77f",
+      "files": {
+        ".gitignore": "sha256:53f0c100a33a56ebada040287b3d0f5dbab21c6ec6b66209fec5515c508f1144",
+        "agents/openai.yaml": "sha256:a2eb83b5f14e0cec1d1f4c6c422c61c2023f48cd6cfd4560940d64d572ecde18",
+        "assets/readme/hero-character.png": "sha256:b5a4cda78a10f988ecba3bcb7aabac60ed72d49a8d17589486c13cc14b37406c",
+        "assets/readme/hero.svg": "sha256:4fde34e3e7521842224c87d300d8b0676b9587c7821937f765e2c4053b257513",
+        "examples/agent-workflow-square.png": "sha256:fd67822c690bb15477f667279ff0b041233f628b44a428239e6dcf401eb4f203",
+        "examples/explainer-agent-workflow.png": "sha256:be9cc46eb4b45087bf6ba365965c08fcfd013751219a53e916a5b9912d1a16b4",
+        "examples/explainer-cost-comparison.png": "sha256:6bec7b5c8688fe1ef19d3bbda5fabadda63c52f45432448f7889041c79677057",
+        "examples/explore-folder-spotlight.png": "sha256:495168c143201192ce133234746691b88069d0ed021b7f773fc9d5fea19fbdbf",
+        "examples/feedback-loop.png": "sha256:6ffc161c9da2ac7d098d546b53846f4f5bb9d2de0faf7de87d07eb75bc164490",
+        "examples/from-complex-to-clear.png": "sha256:3756454167346eaa3b9a7cb92b8b2837fd84efadf558eebea4cb7eb459653dc0",
+        "examples/pipeline-bottleneck.png": "sha256:25610cc62a3fd413bdf65534539423d8988331da2fabf42f3148c6777e920c5a",
+        "examples/simplify-trim.png": "sha256:3bc10d29fb3948edc1423b74796420ccba6641d10ba4c4b93f0f71290ac92259",
+        "examples/transparent-illustration.png": "sha256:b5a4cda78a10f988ecba3bcb7aabac60ed72d49a8d17589486c13cc14b37406c",
+        "LICENSE": "sha256:502de0a0920985e472ef0a28cce28725efe91b1c11a983100186058c81e6469f",
+        "README.md": "sha256:e3e25d0064864ac207509aab31d19af99bf03f0ec1ffabb5c52b9a668041e16c",
+        "scripts/cutout.py": "sha256:a40eee984e6a3af5cf09ce41c93fbf3c8c7d7a7eccb695cc4a531e642055aac3",
+        "SKILL.md": "sha256:a536e271aff6a2f540bc6ffe97d8815e7fab206caae6ffbc9d3c95dd07a7d709"
+      }
+    }
+  ],
+  "env_digest": "f2a958df445c1c2d6a634e4457069970cf6e71cc8352a64b6593f7469ce2aae1"
+}
