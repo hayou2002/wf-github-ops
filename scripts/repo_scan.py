@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""本地仓库盘点与上传前体检。只用 Python 3 标准库，不联网。"""
+"""本地仓库盘点与上传前体检。只用 Python 3 标准库，不联网。
+
+退出码：0（通过）/ 1（命中：凭据类文件被跟踪）/ 2（跑不动：目录不是 git 仓库根、或目录不存在）。
+最后验证：2026-11-14，inventory 与 audit（含非 git 目录）实测。
+"""
 
 from __future__ import annotations
 
@@ -126,7 +130,8 @@ def cmd_inventory(args) -> int:
     roots = [Path(item).expanduser().resolve() for item in (args.paths or [str(Path.cwd())])]
     missing = [str(root) for root in roots if not root.is_dir()]
     if missing:
-        raise SystemExit("这些目录不存在：" + "、".join(missing))
+        print("结论：跑不动（退出码 2：这些目录不存在：" + "、".join(missing) + "）")
+        return 2
     repos = find_repos(roots)
     rows = [describe(repo) for repo in repos]
     known = {str(repo) for repo in repos}
@@ -138,6 +143,7 @@ def cmd_inventory(args) -> int:
         return 0
     if not rows:
         print("这些目录下没有找到 git 仓库：" + "、".join(str(root) for root in roots))
+        print("结论：通过（退出码 0：没有找到 git 仓库）")
         return 0
     width = max(len(row["path"]) for row in rows)
     for row in rows:
@@ -166,6 +172,7 @@ def cmd_inventory(args) -> int:
         print("有仓库套在另一个仓库里面，提交前先确认是刻意保留还是该排除：")
         for item in nested:
             print(f"  {item}")
+    print(f"结论：通过（退出码 0：找到 {len(rows)} 个仓库）")
     return 0
 
 
@@ -214,7 +221,8 @@ def scan_content(repo: Path, rel: str) -> list[str]:
 def cmd_audit(args) -> int:
     repo = Path(args.repo).expanduser().resolve()
     if not git_root(repo):
-        raise SystemExit(f"{repo} 不是 git 仓库根目录。")
+        print(f"结论：跑不动（退出码 2：{repo} 不是 git 仓库根目录——先 git init 再体检）")
+        return 2
     files = tracked_files(repo)
     credentials = [rel for rel in files if looks_like_credential(rel)]
     big: list[tuple[str, int]] = []
@@ -266,7 +274,10 @@ def cmd_audit(args) -> int:
             print(f"    还有 {len(content_hits) - 20} 个文件，加 --json 看全")
     else:
         print("  文件内容：没有扫到疑似密钥或个人目录")
-    print("  结论：" + ("先处理上面的凭据文件再提交。" if credentials else "可以进入提交环节。"))
+    if credentials:
+        print("结论：命中（退出码 1：先处理上面的凭据文件再提交）")
+    else:
+        print("结论：通过（退出码 0：可以进入提交环节）")
     return 1 if credentials else 0
 
 

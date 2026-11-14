@@ -3,12 +3,12 @@ name: wf-github-ops
 description: "本地 Git 整理与 GitHub 上传,先走这条:盘点 → 定范围 → 体检 → 提交 → 推送 → 回读验证,再收拾远端描述、README 与 Release。触发场景:用户说「整理一下本地的 git」「把这些改动传到 GitHub」「把某个目录建成仓库传上去」「发个 Release」,或第一次把项目放上 GitHub。不用于只想看改动讲了什么、单纯改代码;要走分支加 PR 的正式发布交给 git-ship。"
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.2.2"
 ---
 
 # 本地 Git 整理与 GitHub 上传
 
-本机散落多个仓库时，先看清状态，再决定哪个是正本、哪些该传上去，最后把远端也收拾干净。当前是**大纲态**：结构已定，命令与判据待填。要改结构、增减依赖，交给 wf-maker。
+本机散落多个仓库时，先看清状态，再决定哪个是正本、哪些该传上去，最后把远端也收拾干净。要改结构、增减依赖，交给 wf-maker。
 
 ## 什么时候用
 
@@ -26,7 +26,7 @@ metadata:
 
 判断不了就去读那个技能的说明，不要先全部读完再判断。常见的「不用」：目录已经很熟就不用 oil-explore；这次只改文档就不用 oil-code-review；仓库还没到见人的阶段就不用门面那三个；顺手看一眼改动就够，也不用做成一页汇报。
 
-## 底座（每趟都走）
+## 底座（默认全走，按支线裁剪）
 
 | 步骤 | 做什么 | 按需挂的技能 |
 | --- | --- | --- |
@@ -37,16 +37,18 @@ metadata:
 | 5 推送 | 默认直推 main；档案仓走 worktree 通道 | — |
 | 6 验证 | 远端真看到了什么，留下次待办 | — |
 
+支线写明各走哪几步；涉及推送或远端改动时，体检（步骤 3）与验证（步骤 6）不能省。
+
 ## 支线（选一条，或者都不选）
 
 | 支线 | 什么时候走 | 额外用到 | 产出 |
 | --- | --- | --- | --- |
 | ① 备份上传 | 平时的改动要传上去（默认） | oil-diff | 远端已同步 |
 | ② 首次建库或公开 | 第一次把项目放上 GitHub | oil-explore、oil-code-review、beautify-github-readme、oil-tone、oil-visual | 一个能见人的仓库 |
-| ③ 远端维护 | 只想收拾线上仓库 | oil-govern、beautify-github-readme、oil-tone、oil-visual；发 Release 走网页 | 远端状态清单 |
+| ③ 远端维护 | 只想收拾线上仓库 | oil-govern、beautify-github-readme、oil-tone、oil-visual；发 Release 走 REST API | 远端状态清单 |
 | ④ 正式发布 | 走分支加 PR 再合并 | git-ship 接管提交与推送 | 合并进 main |
 
-支线里列出的技能同样按「先取舍再动手」逐条过，不用照样跳过。
+支线里列出的技能同样按「先取舍再动手」逐条过；这次用不上，就照样跳过。
 
 ## 我的习惯与红线
 
@@ -54,12 +56,12 @@ metadata:
 
 ## 依赖与环境
 
-见 [environment.md](references/environment.md)，由 wf-maker 生成，列了九个技能的来源与安装方式。
+见 [environment.md](references/environment.md)，由 wf-maker 生成，列了八个技能的来源与安装方式。
 
 ## 详细步骤
 
 每步的命令、判据、失败处理，以及这份仓库的脱敏边界，都在 [playbook.md](references/playbook.md) 里。
 
-盘点和体检用工作流自带的 `scripts/repo_scan.py`：`inventory` 看本机仓库现状（含 worktree 与嵌套仓库），`audit` 查凭据文件、超大文件和内容里的密钥与个人目录；`audit` 退出码为 1 就说明有凭据文件被跟踪，必须先处理再提交。
+盘点和体检用工作流自带的 `scripts/repo_scan.py`：`inventory` 看本机仓库现状（含 worktree 与嵌套仓库），`audit` 查凭据文件、超大文件和内容里的密钥与个人目录；`audit` 退出码 1（命中）说明有凭据文件被跟踪，必须先处理再提交；退出码 2（跑不动）说明目录还不是 git 仓库或路径不对。
 
-远端那边的事——新建仓库、改描述与标签、发 Release、删远端分支——本机没装 `gh`,但有已保存的 GitHub 凭据,可以直接调 REST API 做完(命令见 playbook 的步骤 5、支线 2、支线 3)。要调视觉效果、要人确认按钮,或 API 被限流时,再开浏览器带着用户一起点。
+远端那边的事——新建仓库、改描述与标签、发 Release、删远端分支——本机没装 `gh`,但有已保存的 GitHub 凭据,可以直接调 REST API 做完(命令见 playbook 的步骤 5、支线 2、支线 3)。要调视觉效果、要用户亲自点确认,或 API 被限流时,再开浏览器带着用户一起点。

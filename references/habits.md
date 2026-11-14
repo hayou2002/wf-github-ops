@@ -16,7 +16,7 @@
 
 - `D:\AI\NewApi管理_repo` 看着像重复仓库，其实是主仓库的 worktree，推档案仓就靠它。判断重复前先看 `.git` 是文件还是目录、再跑 `git worktree list`，别按目录名猜。
 - 本地 `main` 比远端多提交不一定是漏推。这套仓库的档案仓只收脱敏精选的改动，两端本来就不会一样。
-- 技能目录还没 `git init` 时,`repo_scan.py audit` 会直接拒跑(报「不是 git 仓库根目录」),不是脚本坏了;先初始化再体检。
+- 技能目录还没 `git init` 时,`repo_scan.py audit` 会按「跑不动（退出码 2：不是 git 仓库根目录）」拒跑,不是脚本坏了;先初始化再体检。
 - 建库时勾了 `auto_init`(初始化 README / .gitignore / license),首次 `push` 会被拒;用 API 建库默认不初始化,别再手点。
 - 加了 README 或 LICENSE 会改变依赖哈希,引用它的工作流 `check` 会报「原技能已改动」。确认只是文件增减后重新 `link` 一次刷新基线,别让告警常驻。
 - 公开仓库的 README 和 `SKILL.md` 别写同一个意思:结构校验器会把两份文字一起比,判成重复警告。README 换措辞换结构,规则细节留在 `SKILL.md`。
