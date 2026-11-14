@@ -34,6 +34,8 @@ py -3 scripts/repo_scan.py audit <目录>       # 体检:凭据文件、超大�
 
 `audit` 退出码 1（命中）说明有该拦的东西被跟踪了,先处理再提交;退出码 2（跑不动）就先 `git init`。
 
+远端的事不用开浏览器:新建仓库、改描述、发 Release 都走 REST API,命令给全在 playbook 的支线里。
+
 ## 安装
 
 ```bash
