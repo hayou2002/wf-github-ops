@@ -3,7 +3,7 @@ name: wf-github-ops
 description: "本地 Git 整理与 GitHub 上传,先走这条:盘点 → 定范围 → 体检 → 提交 → 推送 → 回读验证,再收拾远端描述、README 与 Release。触发场景:用户说「整理一下本地的 git」「把这些改动传到 GitHub」「把某个目录建成仓库传上去」「发个 Release」,或第一次把项目放上 GitHub。不用于只想看改动讲了什么、单纯改代码;要走分支加 PR 的正式发布交给 git-ship。"
 license: MIT
 metadata:
-  version: "0.2.4"
+  version: "0.2.5"
 ---
 
 # 本地 Git 整理与 GitHub 上传
@@ -49,6 +49,8 @@ metadata:
 | ② 首次建库或公开 | 第一次把项目放上 GitHub | oil-explore、oil-code-review、beautify-github-readme、oil-tone、oil-visual | 一个能见人的仓库 |
 | ③ 远端维护 | 只想收拾线上仓库 | oil-govern、beautify-github-readme、oil-tone、oil-visual；发 Release 走 REST API | 远端状态清单 |
 | ④ 正式发布 | 走分支加 PR 再合并 | git-ship 接管提交与推送 | 合并进 main |
+
+支线 ② 建库时，README 必须带一张 `assets/readme/hero.svg`；用 `beautify-github-readme` 生成，不用等用户提醒。
 
 支线里列出的技能同样按「先取舍再动手」逐条过；这次用不上，就照样跳过。
 

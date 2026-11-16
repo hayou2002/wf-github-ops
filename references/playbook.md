@@ -159,6 +159,36 @@ git -C <仓库> log --oneline -3 origin/main
 
 判据:Release 页面能看到这一版;没有 Release 不算发完。
 
+## README 与 SVG 门面(支线 ②/③ 共用)
+
+什么时候走:仓库要见人,或用户明确要重做 README、加门面图。
+
+新建仓库默认做 `hero.svg`,不用等用户提醒;README 第一段后嵌入,`alt` 写清这张图讲什么。
+
+先定模式,只选一个:
+
+- 只做视觉:用 `beautify-github-readme` 的 asset-only 模式,不改 README 文字。
+- 重做整个 README:用它的 README 模式,按「hero → 证明 → 是什么 → 怎么用」重排。
+
+默认产出纯 SVG,放在 `assets/readme/`:
+
+| 文件 | 用途 |
+| --- | --- |
+| `hero.svg` | 首屏:名称 + 一句话价值 |
+| `section-*.svg` | 分节标题,或流程/架构示意 |
+| `badge-*.svg` | 需要时的小徽章 |
+
+规则:
+
+- 纯 SVG 优先;有动效需求才问用户要不要 GIF,SVG 留作回退。
+- `viewBox` 用 1200,`width="100%"`,系统字体;不要脚本、`foreignObject`、远程字体。
+- 正文、命令、表格、链接留在 Markdown;不要把整个 README 栅格化。
+- README 模式跑 `python3 <beautify 目录>/scripts/audit_readme.py <README>`。
+- 本地按 GitHub 宽度预览,看宽窄两档与明暗对比;SVG 文字不能被裁切。
+- 署名徽章只在用户明确同意后加,不要默认塞。
+
+顺序:定模式 → 生成或修改 SVG → 用户同意后嵌入 README → 预览 → 底座 4 提交、5 推送、6 回读。
+
 ## 支线 ① · 备份上传
 
 什么时候走：平时的改动要传上去，远端不改结构。

@@ -4,6 +4,8 @@
 
 ## 红线
 
+- 新建仓库必须带 README 和 `assets/readme/hero.svg`;用 `beautify-github-readme` 生成,不要等用户提醒。
+
 - 每次升版本必须同步 GitHub Release:tag 与 `vX.Y.Z` 一致,notes 写清这版改了什么;没有 Release 不算发完。
 
 - 每趟先取舍：用不到的技能不读、不写进本次记录，也不为了「走全流程」硬凑步骤；动手前用一句话说明这次用了哪些、哪些不用、为什么。
