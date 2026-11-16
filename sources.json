@@ -1,9 +1,10 @@
 {
   "workflow": "wf-github-ops",
   "title": "本地 Git 整理与 GitHub 上传",
+  "route": "本地 git 整理、传 GitHub、发 Release",
   "status": "active",
   "created": "2026-11-13",
-  "updated": "2026-11-13",
+  "updated": "2026-11-17",
   "sources": [
     {
       "name": "beautify-github-readme",
@@ -71,14 +72,14 @@
         "root": "library",
         "rel": "oil-code-review"
       },
-      "recorded": "2026-11-13",
-      "uses": "支线 ②：改动里有代码、且要对外时才审，私人备份仓不用",
-      "digest": "sha256:b19ab1853a4c457640a75b19acef63eeb63d5b78c07f8d215806e42dee21ef07",
+      "recorded": "2026-11-17",
+      "uses": "支线 2:改动里有代码、且要对外时才审,私人备份仓不用",
+      "digest": "sha256:ce348bdd60261f8e53335c73d8e99c413bc26f9b05c99cced27bddc2d8801381",
       "files": {
-        "references/review-playbook.md": "sha256:cedcb9bf80b07d7e25d065442ac9627179bab4a8ae8e394688ee47df5228644a",
-        "scripts/review_helper.py": "sha256:b4bf2ddc988d786597bacbe9e6fc8c6d7dd4e469b36712f80f9bf85e4151a7e4",
-        "SKILL.md": "sha256:8fce5d9abc10f50a0eea35b5916c077af5794a6e57ef19ed931c7e6fc6d840e6",
-        "tests/test_review_helper.py": "sha256:d22b920a96c53666290067f2c3575aa54d249795e3cbbb425617db8d829b2cd2"
+        "references/review-playbook.md": "sha256:b361589f67de6f77e296a27e0f31d5ecc723a0845c3f2e5105ba2eb45ebfef2d",
+        "scripts/review_helper.py": "sha256:d4101b68dfc32f200bf849beef70a4e0447730f71d3e81cc0c5503ac5ef5890e",
+        "SKILL.md": "sha256:9b35916cdff258e1e9a6a56a27f5cec8259c470377195f28e858a86bb6eea19e",
+        "tests/test_review_helper.py": "sha256:8c35221b872b18b180089006631a4f4d304ab14e1db53b0c7f96a8b21987797b"
       }
     },
     {
@@ -131,21 +132,21 @@
         "kind": "github",
         "repo": "oil-oil/oil-dev-skills",
         "subpath": "skills/oil-explore",
-        "commit": "",
+        "commit": "41b4f85885003743a8537aa912b8b9b0cb3c92ab",
         "label": "magpie 库",
         "root": "library",
         "rel": "oil-explore"
       },
-      "recorded": "2026-11-13",
-      "uses": "底座步骤 1：只在遇到陌生大目录、要判断该不该整个传上去时用；支线 ② 摸清结构",
-      "digest": "sha256:4cee6a4a30741bc80e43dc0268185ddd5f76fed3ae86a375559620141523c151",
+      "recorded": "2026-11-17",
+      "uses": "底座步骤 1:只在遇到陌生大目录、要判断该不该整个传上去时用;支线 2 摸清结构",
+      "digest": "sha256:296d9cad0f728fbd9af28655f7af14a64422a9bb5d49bc158a91d9d85826aae9",
       "files": {
-        "references/parallel-exploration.md": "sha256:e49c006a62354b40ecea99d9ce834df98a60b2e53e1ddaa7609da5c3f5371ff7",
-        "scripts/preferences.py": "sha256:8d700533aa2795cee4f931370a1c371827bf6dd87d3545f28521694984dc4d12",
-        "scripts/repo_map.py": "sha256:79e95f0f001443792a8d1a3c925a2b5f2e3cea83a603458a15707c4ab14b62ae",
-        "SKILL.md": "sha256:108809023840e79b20fb6e71d8bee9eae570fe39f0c99ba2408f69da866f6a01",
-        "tests/test_preferences.py": "sha256:a0cdb242e26bff67e974df0bb412c488fb5c6296c3c7bf8e90924909b29fae2b",
-        "tests/test_repo_map.py": "sha256:eb2b57cc2e09ae96ea2802d3d1f5260d8e6772c8b8725611543233f968e2e58f"
+        "references/parallel-exploration.md": "sha256:3136036a041efbf893c5a097e8f5705b3e3fbb82255b895e01d85b60923b57f6",
+        "scripts/preferences.py": "sha256:c7d7d6fa8f4c167c3317856a8451d6739b0d432e2e2cd05b3fd3bc5f61e12197",
+        "scripts/repo_map.py": "sha256:9cec075d7940031e2fc83241dbe95b162460d0ef00a3f86bf10723d61bf6235a",
+        "SKILL.md": "sha256:921bee5a73eeb800c07fcb6fbd3db6170e7a9fdaf8ba0d7ea28623b910e200a1",
+        "tests/test_preferences.py": "sha256:ff61f47a4223671f6c5299e0edc11f057ce555512b668d6bd126ef24cd7e8a27",
+        "tests/test_repo_map.py": "sha256:b5a623d11eca789d99eb52e2421c52f8ec1c401ce6d4d15aa9537236db2e8563"
       }
     },
     {
@@ -160,15 +161,16 @@
         "root": "library",
         "rel": "oil-govern"
       },
-      "recorded": "2026-11-13",
-      "uses": "支线 ③：远端维护时体检分支、worktree 与过期文档",
-      "digest": "sha256:9e30a75b320be13f10537223a46e10e4eb96536ff5907b1e48f58eea87790706",
+      "recorded": "2026-11-17",
+      "uses": "支线 3:远端维护时体检分支、worktree 与过期文档",
+      "digest": "sha256:ae1a7b4083f4594b1b92f80b8639fe30aee7148a48b0b38438065426da7fb229",
       "files": {
-        "references/dev-profile.md": "sha256:961d5b6aec8923bf6c4ab85e6605aed1c4d6f2e93b01d45918119a3becb97a3c",
-        "references/governance-guide.md": "sha256:1d8666a5c9f687a2379c1a9d623930e4a6ed456d15fef36cae2fea619f487970",
-        "scripts/audit_repo.py": "sha256:36b4bea23db824b8294c73b981e30e6420fac9ec9d366cf033971bb46378ed13",
-        "SKILL.md": "sha256:f45ed978a5379653724e20be131a97c76b00545698f5bd6d524396b814744f16",
-        "tests/test_audit_repo.py": "sha256:db98eb93fbf9a7e7cce55987c098615f44ed4d02cc1f68ea09b4ab5b999c986a"
+        "references/branch-board.md": "sha256:54c15d37920fd9b0f8df44d8ace3351b70288caa55202e2eecb65008e2084ef8",
+        "references/dev-profile.md": "sha256:e974ee4ae574c9ba12c8fe83eab994e045895bdc0399fb12d2b468de9896d899",
+        "references/governance-guide.md": "sha256:8cb06cff3d9f95bd16edd392787e2940990491cdce54571e143877794ff74ce0",
+        "scripts/audit_repo.py": "sha256:339ade020a03898fdcf0e2c112ffda28d938df319a7ef76453eb2524d435088c",
+        "SKILL.md": "sha256:3ffa067bbda5e53bb6180f9a007a2b2d1272742815a30dbe1e6898cfa7f96f2b",
+        "tests/test_audit_repo.py": "sha256:a0e81c90f61e5d32d4fcc1ddcea3c8b60c8238ecde445cd55a6e8d2f49b7986b"
       }
     },
     {
@@ -228,5 +230,5 @@
       }
     }
   ],
-  "env_digest": "f2a958df445c1c2d6a634e4457069970cf6e71cc8352a64b6593f7469ce2aae1"
+  "env_digest": "62f263eda2462040e78154125130670b972e5cd3015c0825eb761ede2bffd010"
 }

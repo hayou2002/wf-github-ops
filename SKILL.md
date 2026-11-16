@@ -3,7 +3,7 @@ name: wf-github-ops
 description: "本地 Git 整理与 GitHub 上传,先走这条:盘点 → 定范围 → 体检 → 提交 → 推送 → 回读验证,再收拾远端描述、README 与 Release。触发场景:用户说「整理一下本地的 git」「把这些改动传到 GitHub」「把某个目录建成仓库传上去」「发个 Release」,或第一次把项目放上 GitHub。不用于只想看改动讲了什么、单纯改代码;要走分支加 PR 的正式发布交给 git-ship。"
 license: MIT
 metadata:
-  version: "0.2.2"
+  version: "0.2.3"
 ---
 
 # 本地 Git 整理与 GitHub 上传
@@ -25,6 +25,8 @@ metadata:
 3. 动手前用一句话告诉用户：这次用哪几个、哪几个不用、为什么。
 
 判断不了就去读那个技能的说明，不要先全部读完再判断。常见的「不用」：目录已经很熟就不用 oil-explore；这次只改文档就不用 oil-code-review；仓库还没到见人的阶段就不用门面那三个；顺手看一眼改动就够，也不用做成一页汇报。
+
+这套流程是提醒，不是卡点；能用小的就不做大。
 
 ## 底座（默认全走，按支线裁剪）
 
@@ -56,7 +58,7 @@ metadata:
 
 ## 依赖与环境
 
-见 [environment.md](references/environment.md)，由 wf-maker 生成，列了八个技能的来源与安装方式。
+见 [environment.md](references/environment.md)，由 wf-maker 生成，列了八个技能的来源与安装方式。需要你本人定的口径写进 `references/habits.md`；没有就先问一次。
 
 ## 详细步骤
 
