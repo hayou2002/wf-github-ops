@@ -3,7 +3,7 @@ name: wf-github-ops
 description: "本地 Git 整理与 GitHub 上传,先走这条:盘点 → 定范围 → 体检 → 提交 → 推送 → 回读验证,再收拾远端描述、README 与 Release。触发场景:用户说「整理一下本地的 git」「把这些改动传到 GitHub」「把某个目录建成仓库传上去」「发个 Release」,或第一次把项目放上 GitHub。不用于只想看改动讲了什么、单纯改代码;要走分支加 PR 的正式发布交给 git-ship。"
 license: MIT
 metadata:
-  version: "0.2.3"
+  version: "0.2.4"
 ---
 
 # 本地 Git 整理与 GitHub 上传

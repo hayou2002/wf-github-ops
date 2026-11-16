@@ -149,6 +149,16 @@ git -C <仓库> log --oneline -3 origin/main
 
 记录：这次踩到的坑写进 `habits.md`；留下的待办告诉用户。
 
+### 步骤 7 · 同步 Release
+
+什么时候走:这次升了版本号,或用户要求发版。
+
+1. 确认版号与 tag 一致(`vX.Y.Z`),tag 指向刚推送的提交。
+2. 用 REST API 建 Release:`POST /repos/<owner>/<repo>/releases`,`tag_name` 与 `name` 用 `vX.Y.Z`,`body` 写这版改了什么、怎么验证。
+3. 回读 `GET /repos/<owner>/<repo>/releases/latest`,确认 tag、name 与发布时间。
+
+判据:Release 页面能看到这一版;没有 Release 不算发完。
+
 ## 支线 ① · 备份上传
 
 什么时候走：平时的改动要传上去，远端不改结构。
